@@ -121,6 +121,9 @@ with open(filename, "w") as f:
                z = getValue(line, "Z", z)
 
 
-               if not ((getValue(line, "G", None) == 1 or getValue(line, "G", None) == 0) and startEffect == 1 and startFill == 1):
-                    f.write(line)
+               if (getValue(line, "G", None) == 1 or getValue(line, "G", None) == 0) and startEffect == 1 and startFill == 1:
+                    f.write("G92 E%0.4f " %(e))
+                    f.write("\n")
+
+               else: f.write(line)
 
