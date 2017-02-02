@@ -192,8 +192,6 @@ class Parser:
         with open(self.file_path) as f:
             line_number = 0
             for line in f:
-                line_number += 1
-
                 # Break if line threshold is hit
                 if line_number > n:
                     # print('Average e_per_mm: ', avg_e_per_mm)
@@ -208,6 +206,9 @@ class Parser:
                 
                 # Record moves
                 if (line_split[0] == 'G0') or (line_split[0] == 'G1'):
+                    # Only count lines if they contain a move
+                    line_number += 1
+                    
                     x = self.regex_x.search(line)
                     y = self.regex_y.search(line)
                     e = self.regex_e.search(line)
